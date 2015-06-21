@@ -5,7 +5,6 @@ import com.daumkakao.s2graph.core._
 
 // import com.daumkakao.s2graph.core.mysqls._
 import com.daumkakao.s2graph.core.models._
-
 import com.daumkakao.s2graph.core.types2.InnerValLike
 
 import scala.util.parsing.combinator.JavaTokenParsers
@@ -15,6 +14,7 @@ import scala.util.parsing.combinator.JavaTokenParsers
  */
 case class Where(val clauses: Seq[Clause] = Seq.empty[Clause]) {
   def filter(edge: Edge): Boolean = {
+    println(clauses)
     clauses.map(_.filter(edge)).forall(r => r)
   }
 }
@@ -67,7 +67,7 @@ case class Between(val propKey: Byte, val minValue: InnerValLike, val maxValue: 
         edge.props.get(propKey) match {
           case None => true
           case Some(edgeVal) =>
-            minValue <= edgeVal && edgeVal <= maxValue
+            (minValue <= edgeVal) && (edgeVal <= maxValue)
         }
     }
 
