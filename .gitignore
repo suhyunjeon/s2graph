@@ -32,3 +32,4 @@ migrate/s2graph
 *.classpath
 *.project
 s2core/src/main/scala/com/daumkakao/s2graph/core/mysqls
+*.iml
