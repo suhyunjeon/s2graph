@@ -138,8 +138,7 @@ sh script/test.sh
 
 The Data Model
 --------------
-
-There are four important abstractions that define the data model used throughout s2graph: services, columns, labels and properties.
+s2graph 에서 사용하는 data model 을 정의하는 4가지 중요한 추상적인 개념은 services, columns, labels 그리고 properties 가 있다.
 
 **Services**, the top level abstraction, are like databases in traditional RDBMS in which all data are contained. A service usually represents one of the company's real services and is named accordingly, e.g. `"KakaoTalk"`, `"KakaoStory"`.
 
