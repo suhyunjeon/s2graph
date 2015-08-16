@@ -3,7 +3,7 @@
 **s2graph**
 ===================
 
-**s2graph 는 **가장자리(edges)** 와 **정점(vertices)** 을 사용하여 빅데이터를 저장하는 **GraphDB** 이다. 
+**s2graph** 는 **가장자리(edges)** 와 **정점(vertices)** 을 사용하여 빅데이터를 저장하는 **GraphDB** 이다. 
 또한 가장자리(edges)와 정점(vertices)의 정보를 질의하기 위해 REST API 를 제공한다.
 s2graph 는 무려 **비동기(asynchronous), 넌 블로킹(non-blocking) API to manupulate and traverse(breadth first search) large graph** 를 제공한다.
 이 문서는 s2graph 에서 사용되는 용어와 개념을 정의하고, REST API 를 설명한다. 
