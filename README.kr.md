@@ -91,13 +91,12 @@ Table of content
 
 Getting Started
 -------------
+S2Graph 는 다양한 프로젝트들로 구성되어 있다.
 
-S2Graph consists of multiple projects.
-
-1. **S2Core**: core library for common classes to store and retrieve data as edge/vertex. 
-2. **root project**: Play rest server that provide rest APIs.
-3. **spark**: spark related common classes. 
-4. **loader**: spark jobs that consume events from Kafka to HBase using S2Core library. also contains migration kit from hdfs to s2graph.
+1. **S2Core**: edge/vertex 로 데이터를 검색하고 저장하는 common 클래스를 위한 core library.
+2. **root project**: Rest APIs 를 제공하는 Play rest server.
+3. **spark**: spark 와 연관된 common 클래스. 
+4. **loader**: S2Core library를 사용하여 Kafka에서 HBase 로 이벤트를 소비하는 spark jobs. 또한 HDFS에서 s2graph 로 마이그레이션하는 kit이 포함되어 있다.
 5. **asynchbase**: This is fork from https://github.com/OpenTSDB/asynchbase. we add few functionalities on GetRequest. all theses are heavily relies on pull requests which not have been merged on original project yet. 
 	6. rpcTimeout
 	7. setFilter
