@@ -97,7 +97,7 @@ S2Graph 는 다양한 프로젝트들로 구성되어 있다.
 2. **root project**: Rest APIs 를 제공하는 Play rest server.
 3. **spark**: spark 와 연관된 common 클래스. 
 4. **loader**: S2Core library를 사용하여 Kafka에서 HBase 로 이벤트를 소비하는 spark jobs. 또한 HDFS에서 s2graph 로 마이그레이션하는 kit이 포함되어 있다.
-5. **asynchbase**: This is fork from https://github.com/OpenTSDB/asynchbase. we add few functionalities on GetRequest. all theses are heavily relies on pull requests which not have been merged on original project yet. 
+5. **asynchbase**: 이 곳(https://github.com/OpenTSDB/asynchbase)으로부터 fork 한 것이다. 우리는 GetRequest 에 몇 가지 기능을 추가하였다. 이것들 전부 아직 original 프로젝트에 병합(merge)되지 않은 pull request 에 굉장히 의존하고 있다. 
 	6. rpcTimeout
 	7. setFilter
 	8. column pagination
@@ -110,8 +110,8 @@ S2Graph 는 다양한 프로젝트들로 구성되어 있다.
 to getup and running following is required. 
 
 1. [Apache HBase](http://hbase.apache.org/) setup. 
-	2.  `brew install hadoop` and `brew install hbase` if you are on mac.
-	3. otherwise checkout [reference](http://hbase.apache.org/book.html#quickstart) for how to setup hbase.
+	2. Mac 유저라면 `brew install hadoop` 와 `brew install hbase` 를 실행한다.
+	3. Mac 유저가 아니라면, hbase 를 어떻게 설치하는지 이 링크를 확인하자. [reference](http://hbase.apache.org/book.html#quickstart)
 	4. note that currently we support latest stable version of apache **hbase 1.0.1 with apache hadoop version 2.7.0**. if you are using cdh, then you can checkout our **feature/cdh5.3.0**. we are working on providing profile on hbase/hadoop version soon.
 2. s2graph store metadata in mysql currently, so you need to create database in mysql. run setup script s2core/migrate/mysql/schema.sql
 
