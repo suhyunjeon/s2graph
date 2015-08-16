@@ -3,8 +3,6 @@
 **s2graph**
 ===================
 
-**s2graph** is a **GraphDB** that stores big data using **edges** and **vertices**, and also serves REST APIs for querying information on its edges and vertices. It provide fully  **asynchronous, non-blocking API to manupulate and traverse(breadth first search) large graph**. This document defines terms and concepts used in s2graph and describes its REST API. It provide fully  **asynchronous, non-blocking API to manupulate and traverse(breadth first search) large graph**. This document defines terms and concepts used in s2graph and describes its REST API. 
-
 **s2graph 는 **가장자리(edges)** 와 **정점(vertices)** 을 사용하여 빅데이터를 저장하는 **GraphDB** 이다. 
 또한 가장자리(edges)와 정점(vertices)의 정보를 질의하기 위해 REST API 를 제공한다.
 s2graph 는 무려 **비동기(asynchronous), 넌 블로킹(non-blocking) API to manupulate and traverse(breadth first search) large graph** 를 제공한다.
