@@ -113,26 +113,26 @@ to getup and running following is required.
 	2. Mac 유저라면 `brew install hadoop` 와 `brew install hbase` 를 실행한다.
 	3. Mac 유저가 아니라면, hbase 를 어떻게 설치하는지 이 링크를 확인하자. [reference](http://hbase.apache.org/book.html#quickstart)
 	4. 현재 apache **hbase 1.0.1 with apache hadoop version 2.7.0** 의 최신 stable 버전을 제공하며, 만약 cdh 를 사용한다면, **feature/cdh5.3.0** 를 checkout 받자. 우리는 곧 hbase/hadoop 버전에서 profile을 제공하기 위해 노력하고 있다. 
-2. s2graph 는 현재 mysql 에서 메타데이터를 저장한다. 그렇기 때문에 mysql 에 database 를 create 해야 한다. 이 스크립트 's2core/migrate/mysql/schema.sql' 를 실행하여 schema 를 설정하자.
+2. s2graph 는 현재 mysql 에서 메타데이터를 저장한다. 이 스크립트 's2core/migrate/mysql/schema.sql' 를 실행하여 mysql 에 관련 테이블을 생성하자.  
 
-then compile rest project
+그리고 나머지 프로젝트를 컴파일 한다.  
 ```
 sbt compile
 ```
 
 
-now you are ready to run s2graph.
+이제 s2graph 를 실행할 준비가 되어 있다.  
 ```
 sbt run
 ```
 
-we provide simple script under script/test.sh only for checking if everything setup property.
 
+우리는 모든 설정 property 를 체크하는 아래의 간단한 스크립트  script/test.sh를 제공한다. 
 ```
 sh script/test.sh
 ```
 
-finally join the [mailing list](https://groups.google.com/forum/#!forum/s2graph)
+마지막으로 [메일링 리스트](https://groups.google.com/forum/#!forum/s2graph) 에 조인한다. 
 
 
 
