@@ -107,8 +107,7 @@ S2Graph 는 다양한 프로젝트들로 구성되어 있다.
 
 ----------
 
-to getup and running following is required. 
-
+Setup 하고 아래 요구사항에 따라 실행한다. 
 1. [Apache HBase](http://hbase.apache.org/) setup. 
 	2. Mac 유저라면 `brew install hadoop` 와 `brew install hbase` 를 실행한다.
 	3. Mac 유저가 아니라면, hbase 를 어떻게 설치하는지 이 링크를 확인하자. [reference](http://hbase.apache.org/book.html#quickstart)
@@ -121,7 +120,7 @@ sbt compile
 ```
 
 
-이제 s2graph 를 실행할 준비가 되어 있다.  
+이제 s2graph 를 실행한다.  
 ```
 sbt run
 ```
@@ -142,15 +141,16 @@ s2graph 에서 사용하는 data model 을 정의하는 4가지 중요한 추상
 
 **Services**, 상위 수준의 추상화는 모든 데이터가 포함되어있는 전통적인 RDBMS의 데이터베이스와 같은 것이다. 서비스는 일반적으로 기업의 실제 서비스 중 하나를 나타내며, 예를 들어 `"KakaoTalk"`, `"KakaoStory"` 처럼 명명되어 있다.
 
-**Columns** 정점(vertices) type을 정의하고 서비스는 다양한 column을 가질 수 있다. 한 예로, `"KakaoMusic"` 서비스는 `"user_id"`와 `"track_id"` 컬럼을 가질 수 있다. column은 전통적인 RDBMS의 table과 비교 할 수 있는 반면, lable은 오직 자신의 이름을 사용하여 schema와 column이 일반적으로 참조되는 것을 표현하는 기본 추상화이다. (말이 어렵네요;)
+**Columns** vertices type을 정의하고 서비스는 다양한 column을 가질 수 있다. 한 예로, `"KakaoMusic"` 서비스는 `"user_id"`와 `"track_id"` 컬럼을 가질 수 있다. column은 전통적인 RDBMS의 table과 비교 할 수 있는 반면, lable은 오직 자신의 이름을 사용하여 schema와 column이 일반적으로 참조되는 것을 표현하는 기본 추상화이다. (말이 어렵네요;)
 
 **Labels**, represent relations between two columns, therefore representing the type of edges. The two columns can be the same, e.g. for a label representing friendships in an SNS, the two column will both be `"user_id"` of the service. There can be labels connecting two columns from two different services; for example, one can create a label that stores all events where KakaoStory posts are shared to KakaoTalk.
-**Labels**, 가장자리(edges)의 type을 나타내는 두 columns 사이의 관계를 나타낸다. 예를 들어 SNS에서 우정을 표현하는 label의 두 개 column 모두 `"user_id"` 가 될 것이다. 두 개의 다른 서비스에서 두 개의 column이 연결 되는 경우도 있다. 예를 들어, 하나는 KakaoStory 포스트가 KakaoTalk으로 공유되는 모든 이벤트를 포함하는 label을 만들 수 있다.
+**Labels**, edges의 type을 나타내는 두 columns 사이의 관계를 나타낸다. 예를 들어 SNS에서 우정을 표현하는 label은 두 개 column이 같을 수 있다. 그 column 들은 서비스에서 `"user_id"` 로 둘 다 할 것이다. 두 개의 다른 서비스에서 두 column이 연결된 lable 인 경우도 있다. 예를 들어, 하나는 KakaoStory 포스트가 KakaoTalk 으로 공유되는 모든 이벤트를 포함하는 label을 create 할 수 있다.
 
 **Properties**, are metadata linked to vertices or edges that can be queried upon later. For vertices representing KakaoTalk users, `estimated_birth_year` is a possible property, and for edges representing similar KakaoMusic songs their `cosine_similarity` can be a property.
+나중에 질의를 할 수 있는 vertices 혹은 edges에 연결되어 있는 metadata 다. KakaoTalk 사용자를 나타내는 vertices,`estimated_birth_year`는 사용 가능한 property 이며, 유사한 KakaoMusic 노래를 나타내는 edges는  그것의 `cosine_similarity` property가 될 수 있다.
 
 Using these abstractions, a unique vertex can be identified with its `(service, column, vertex id)`, and a unique edge can be identified with its `(service, label, source vertex id, target vertex id)`. Additional information on edges and vertices are stored within their own properties.
-
+이러한 추상화를 사용하여 고유의 vertex는 `(service, column, vertex id)` 에서 확인할 수 있으며, 고유의 edge는 `(service, label, source vertex id, target vertex id)`에서 확인할 수 있다. edges 와 vertices에 대한 추가 정보는 자신의 properties에 저장된다.
 
 REST API Glossary
 -----------------
