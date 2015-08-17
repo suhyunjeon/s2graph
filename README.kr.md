@@ -142,9 +142,10 @@ s2graph 에서 사용하는 data model 을 정의하는 4가지 중요한 추상
 
 **Services**, 상위 수준의 추상화는 모든 데이터가 포함되어있는 전통적인 RDBMS의 데이터베이스와 같은 것이다. 서비스는 일반적으로 기업의 실제 서비스 중 하나를 나타내며, 예를 들어 `"KakaoTalk"`, `"KakaoStory"` 처럼 명명되어 있다.
 
-**Columns** 정점 type을 정의하고 서비스는 다양한 column을 가질 수 있다. 한 예로, `"KakaoMusic"` 서비스는 `"user_id"`와 `"track_id"` 컬럼을 가질 수 있다. column은 전통적인 RDBMS의 table과 비교 할 수 있는 반면, lable은 오직 자신의 이름을 사용하여 schema와 column이 일반적으로 참조되는 것을 표현하는 기본 추상화이다. (말이 어렵네요;)
+**Columns** 정점(vertices) type을 정의하고 서비스는 다양한 column을 가질 수 있다. 한 예로, `"KakaoMusic"` 서비스는 `"user_id"`와 `"track_id"` 컬럼을 가질 수 있다. column은 전통적인 RDBMS의 table과 비교 할 수 있는 반면, lable은 오직 자신의 이름을 사용하여 schema와 column이 일반적으로 참조되는 것을 표현하는 기본 추상화이다. (말이 어렵네요;)
 
 **Labels**, represent relations between two columns, therefore representing the type of edges. The two columns can be the same, e.g. for a label representing friendships in an SNS, the two column will both be `"user_id"` of the service. There can be labels connecting two columns from two different services; for example, one can create a label that stores all events where KakaoStory posts are shared to KakaoTalk.
+**Labels**, 가장자리(edges)의 type을 나타내는 두 columns 사이의 관계를 나타낸다. 예를 들어 SNS에서 우정을 표현하는 label의 두 개 column 모두 `"user_id"` 가 될 것이다. 두 개의 다른 서비스에서 두 개의 column이 연결 되는 경우도 있다. 예를 들어, 하나는 KakaoStory 포스트가 KakaoTalk으로 공유되는 모든 이벤트를 포함하는 label을 만들 수 있다.
 
 **Properties**, are metadata linked to vertices or edges that can be queried upon later. For vertices representing KakaoTalk users, `estimated_birth_year` is a possible property, and for edges representing similar KakaoMusic songs their `cosine_similarity` can be a property.
 
