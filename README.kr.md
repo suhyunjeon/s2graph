@@ -127,7 +127,7 @@ sbt run
 ```
 
 
-우리는 모든 설정 property 를 체크하는 아래의 간단한 스크립트  script/test.sh를 제공한다. 
+우리는 모든 설정 property 를 체크하는 간단한 스크립트를 제공한다. 
 ```
 sh script/test.sh
 ```
@@ -140,9 +140,9 @@ The Data Model
 --------------
 s2graph 에서 사용하는 data model 을 정의하는 4가지 중요한 추상적인 개념은 services, columns, labels 그리고 properties 가 있다.
 
-**Services**, the top level abstraction, are like databases in traditional RDBMS in which all data are contained. A service usually represents one of the company's real services and is named accordingly, e.g. `"KakaoTalk"`, `"KakaoStory"`.
+**Services**, 상위 수준의 추상화는 모든 데이터가 포함되어있는 전통적인 RDBMS의 데이터베이스와 같은 것이다. 서비스는 일반적으로 기업의 실제 서비스 중 하나를 나타내며, 예를 들어 `"KakaoTalk"`, `"KakaoStory"` 처럼 명명되어 있다.
 
-**Columns** define the type of vertices and a service can have multiple columns. For example, service `"KakaoMusic"` can have columns `"user_id"` and `"track_id"`. While columns can be compared to tables in traditional RDBMS in a sense, labels are the primary abstraction for representing schemas and columns are usually referenced only using their names.
+**Columns** 정점 type을 정의하고 서비스는 다양한 column을 가질 수 있다. 한 예로, `"KakaoMusic"` 서비스는 `"user_id"`와 `"track_id"` 컬럼을 가질 수 있다. column은 전통적인 RDBMS의 table과 비교 할 수 있는 반면, lable은 오직 자신의 이름을 사용하여 schema와 column이 일반적으로 참조되는 것을 표현하는 기본 추상화이다. (말이 어렵네요;)
 
 **Labels**, represent relations between two columns, therefore representing the type of edges. The two columns can be the same, e.g. for a label representing friendships in an SNS, the two column will both be `"user_id"` of the service. There can be labels connecting two columns from two different services; for example, one can create a label that stores all events where KakaoStory posts are shared to KakaoTalk.
 
