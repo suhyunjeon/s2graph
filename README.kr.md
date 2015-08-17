@@ -143,27 +143,22 @@ s2graph 에서 사용하는 data model 을 정의하는 4가지 중요한 추상
 
 **Columns** vertices type을 정의하고 서비스는 다양한 column을 가질 수 있다. 한 예로, `"KakaoMusic"` 서비스는 `"user_id"`와 `"track_id"` 컬럼을 가질 수 있다. column은 전통적인 RDBMS의 table과 비교 할 수 있는 반면, lable은 오직 자신의 이름을 사용하여 schema와 column이 일반적으로 참조되는 것을 표현하는 기본 추상화이다. (말이 어렵네요;)
 
-**Labels**, represent relations between two columns, therefore representing the type of edges. The two columns can be the same, e.g. for a label representing friendships in an SNS, the two column will both be `"user_id"` of the service. There can be labels connecting two columns from two different services; for example, one can create a label that stores all events where KakaoStory posts are shared to KakaoTalk.
 **Labels**, edges의 type을 나타내는 두 columns 사이의 관계를 나타낸다. 예를 들어 SNS에서 우정을 표현하는 label은 두 개 column이 같을 수 있다. 그 column 들은 서비스에서 `"user_id"` 로 둘 다 할 것이다. 두 개의 다른 서비스에서 두 column이 연결된 lable 인 경우도 있다. 예를 들어, 하나는 KakaoStory 포스트가 KakaoTalk 으로 공유되는 모든 이벤트를 포함하는 label을 create 할 수 있다.
 
-**Properties**, are metadata linked to vertices or edges that can be queried upon later. For vertices representing KakaoTalk users, `estimated_birth_year` is a possible property, and for edges representing similar KakaoMusic songs their `cosine_similarity` can be a property.
-나중에 질의를 할 수 있는 vertices 혹은 edges에 연결되어 있는 metadata 다. KakaoTalk 사용자를 나타내는 vertices,`estimated_birth_year`는 사용 가능한 property 이며, 유사한 KakaoMusic 노래를 나타내는 edges는  그것의 `cosine_similarity` property가 될 수 있다.
+**Properties**, 나중에 질의를 할 수 있는 vertices 혹은 edges에 연결되어 있는 metadata 다. KakaoTalk 사용자를 나타내는 vertices,`estimated_birth_year`는 사용 가능한 property 이며, 유사한 KakaoMusic 노래를 나타내는 edges는  그것의 `cosine_similarity` property가 될 수 있다.
 
-Using these abstractions, a unique vertex can be identified with its `(service, column, vertex id)`, and a unique edge can be identified with its `(service, label, source vertex id, target vertex id)`. Additional information on edges and vertices are stored within their own properties.
-이러한 추상화를 사용하여 고유의 vertex는 `(service, column, vertex id)` 에서 확인할 수 있으며, 고유의 edge는 `(service, label, source vertex id, target vertex id)`에서 확인할 수 있다. edges 와 vertices에 대한 추가 정보는 자신의 properties에 저장된다.
+이러한 추상화를 사용하여 unique한 vertex는 `(service, column, vertex id)` 에서 확인할 수 있으며, unique한 edge는 `(service, label, source vertex id, target vertex id)`에서 확인할 수 있다. edges 와 vertices에 대한 추가 정보는 자신의 properties에 저장된다.
 
-REST API Glossary
+REST API 용어사전
 -----------------
-
-The following is a non-exhaustive list of commonly used s2graph APIs and their examples. The full list of the latest REST API can be found in [the routes file](conf/routes).
+다음은 일반적으로 사용되는 s2graph API와 그에 대한(하나도 빠트림없이) 예제 목록이다. 이 곳에서 모든 최신 REST API 를 찾을 수있다. [the routes file](conf/routes)
 
 ## 0. Create a Service - `POST /graphs/createService`  ##
 
+다음은 API 를 통해 설정하는 방법을 알아보도록 하자.
 
-see following to see what you can set with this API.
-
-### 0.1 service definition
-To create a Service, the following fields needs to be specified in the request.
+### 0.1 서비스 정의 
+Service 를 create 하는 것은 다음과 같이 필요한 field 를 정의하고 요청한다. 
 
 |field name |  definition | data type |  example | note |
 |:------- | --- |:----: | --- | :-----|
