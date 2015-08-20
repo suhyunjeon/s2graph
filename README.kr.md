@@ -160,12 +160,12 @@ REST API 용어사전
 ### 0.1 서비스 정의 
 Service 를 create 하는 것은 다음과 같이 필요한 field 를 정의하고 요청한다. 
 
-|field name |  definition | data type |  example | note |
+|파일이름 |  정의 | 데이터 타입 |  예제 | 비고 |
 |:------- | --- |:----: | --- | :-----|
-| **serviceName** | name of user defined namespace. | string | "talk_friendship"| required. |
-| cluster | zookeeper quorum address for your cluster.| string | "abc.com:2181,abd.com:2181" | optional. <br>default value is "hbase.zookeeper.quorum" on your application.conf. if there is no value for "hbase.zookeeper.quorum" is defined on application.conf, then default value is "localhost" |
-| hTableName | physical HBase table name.|string| "test"| optional. <br> default is serviceName-#{phase}. <br> phase is either dev/real/alpha/sandbox |
-| hTableTTL | global time to keep the data alive. | integer | 86000 | optional. default is infinite.
+| **serviceName** | 사용자 정의 namespace 이름 | string | "talk_friendship"| required. |
+| cluster | 클러스터의 zookeeper 쿼럼 주소 | string | "abc.com:2181,abd.com:2181" | optional. <br>application.conf 의 기본 값은 "hbase.zookeeper.quorum" 이다. "hbase.zookeeper.quorum"에 대한 값이 없는 경우 application.conf에기본 값 "localhost"로 정의한다. |
+| hTableName | 물리적인 HBase 테이블 이름 |string| "test"| optional. <br> 기본은 serviceName-#{phase} 이다. <br> phase 중 하나는 dev/real/alpha/sandbox 이다. |
+| hTableTTL | 살아있는 데이터 유지 global 시간 | integer | 86000 | optional. 기본은 시간 제한이 없다.
 | preSplitSize | ratio for number of pre split for HBase table. numOfRegionServer x this number will decide exact pre-split size.| integer|1|optional. <br> default is 0(no pre-split). if you set this to 1, then s2graph will pre-split your table with 1 x **numOfRegionServers** |
 
 Service is the top level abstraction in s2graph which can be considered like a database in RDBMS. You can create a service using this API:
@@ -189,7 +189,7 @@ curl -XGET localhost:9000/graphs/getLabels/:serviceName
 
 
 
-## 1. Create a Label - `POST /graphs/createLabel` ##
+## 1. Label 생성 - `POST /graphs/createLabel` ##
 
 
 ----------
