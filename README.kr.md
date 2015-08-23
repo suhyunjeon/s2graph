@@ -166,7 +166,7 @@ Service 를 create 하는 것은 다음과 같이 필요한 field 를 정의하�
 | cluster | 클러스터의 zookeeper 쿼럼 주소 | string | "abc.com:2181,abd.com:2181" | optional. <br>application.conf 의 기본 값은 "hbase.zookeeper.quorum" 이다. "hbase.zookeeper.quorum"에 대한 값이 없는 경우 application.conf에기본 값 "localhost"로 정의한다. |
 | hTableName | 물리적인 HBase 테이블 이름 |string| "test"| optional. <br> 기본은 serviceName-#{phase} 이다. <br> phase 중 하나는 dev/real/alpha/sandbox 이다. |
 | hTableTTL | 살아있는 데이터 유지 global 시간 | integer | 86000 | optional. 기본은 시간 제한이 없다.
-| preSplitSize | HBase 테이블의 pre-split 숫자 비율. numOfRegionServer x this number will decide exact pre-split size.| integer|1|optional. <br> 기본은 0(no pre-split)이다. 만약 1로 설정하면, s2graph 는 당신의 테이블에 1 x **numOfRegionServers** 만큼 pre-split 될 것 이다.|
+| preSplitSize | HBase 테이블의 pre-split 숫자 비율. numOfRegionServer x 이 숫자는 pre-split 사이즈를 가져오도록 결정할 수있다.| integer|1|optional. <br> 기본은 0(no pre-split)이다. 만약 1로 설정하면, s2graph 는 당신의 테이블에 1 x **numOfRegionServers** 만큼 pre-split 될 것 이다.|
 
 Service 는 상위 수준의 추상화로 RDBMS 의 데이터베이스와 같은 것으로 여겨질 수 있다. 이 API 를 사용하여 service 를 생성할 수 있다.
 
@@ -197,10 +197,12 @@ curl -XGET localhost:9000/graphs/getLabels/:serviceName
 
 A label represents a relation between two columns, and plays a role like a table in RDBMS since labels contain the schema information, i.e. what type of data will be collected and what among them needs to be indexed for efficient retrieval. In most scenario, defining a schema on vertices is pretty straightforward but defining a schema on edges requires a little effort. Think about queries you will need first, and then model user's actions/relations as **edges** to design a label.
 
-### 1.1 label definition
-To create a Label, the following fields needs to be specified in the request.
+2 개의 column 사이의 관계를 나타내는 label은 schema 정보, 즉 data type이 수집되고 어떤 것들 가운데 효율적인 검색을 위한 index를 만들 필요가 있지만 포함 되어 있기 때문에 RDBMS의 테이블과 같은 역할을 하고 있다. 대부분의 시나리오에서는 vertices 에 schema를 정의하는 것은 매우 간단하지만 edges 에 schema를 정의하면 약간의 노력이 필요하다. 당신이 먼저 필요하고, 그 **edges** 와 같은 model 사용자의 action/relations 가 label을 설계하는 쿼리를 생각해보자.
 
-|field name |  definition | data type |  example | note |
+### 1.1 label 정의
+Label 을 생성하는 것은, 아래와 같이 request 요청을 정의하는 fields 가 필요하다. 
+
+|field 이름 |  정의 | 데이터 타입 |  예제 | 비고 |
 |:------- | --- |:----: | --- | :-----|
 | **label** | name of this relation; be specific. | string | "talk_friendship"| required. |
 | srcServiceName | source column's service | string | "kakaotalk" | required. |
