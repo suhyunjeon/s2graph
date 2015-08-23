@@ -166,18 +166,18 @@ Service 를 create 하는 것은 다음과 같이 필요한 field 를 정의하�
 | cluster | 클러스터의 zookeeper 쿼럼 주소 | string | "abc.com:2181,abd.com:2181" | optional. <br>application.conf 의 기본 값은 "hbase.zookeeper.quorum" 이다. "hbase.zookeeper.quorum"에 대한 값이 없는 경우 application.conf에기본 값 "localhost"로 정의한다. |
 | hTableName | 물리적인 HBase 테이블 이름 |string| "test"| optional. <br> 기본은 serviceName-#{phase} 이다. <br> phase 중 하나는 dev/real/alpha/sandbox 이다. |
 | hTableTTL | 살아있는 데이터 유지 global 시간 | integer | 86000 | optional. 기본은 시간 제한이 없다.
-| preSplitSize | ratio for number of pre split for HBase table. numOfRegionServer x this number will decide exact pre-split size.| integer|1|optional. <br> default is 0(no pre-split). if you set this to 1, then s2graph will pre-split your table with 1 x **numOfRegionServers** |
+| preSplitSize | HBase 테이블의 pre-split 숫자 비율. numOfRegionServer x this number will decide exact pre-split size.| integer|1|optional. <br> 기본은 0(no pre-split)이다. 만약 1로 설정하면, s2graph 는 당신의 테이블에 1 x **numOfRegionServers** 만큼 pre-split 될 것 이다.|
 
-Service is the top level abstraction in s2graph which can be considered like a database in RDBMS. You can create a service using this API:
+Service 는 상위 수준의 추상화로 RDBMS 의 데이터베이스와 같은 것으로 여겨질 수 있다. 이 API 를 사용하여 service 를 생성할 수 있다.
 
 ```
 curl -XPOST localhost:9000/graphs/createService -H 'Content-Type: Application/json' -d '
 {"serviceName": "s2graph", "cluster": "address for zookeeper", "hTableName": "hbase table name", "hTableTTL": 86000, "preSplitSize": # of pre split}
 '
 ```
->note that optional value for your service is only advanced users only. stick to default if you don`t know what you are doing.
+>Service 에 대한 옵션 값은 상위의 users 만 된다는 점을 유의하자. 만약 무엇을 해야 할지 모른다면, 기본 방침을 그대로 지킨다.
 
-You can also look up all labels corresponding to a service.
+또한 service 에 해당하는 모든 label 을 검색할 수 있다.
 
 ```
 curl -XGET localhost:9000/graphs/getLabels/:serviceName
