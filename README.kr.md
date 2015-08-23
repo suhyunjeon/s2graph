@@ -204,24 +204,26 @@ Label 을 생성하는 것은, 아래와 같이 request 요청을 정의하는 f
 
 |field 이름 |  정의 | 데이터 타입 |  예제 | 비고 |
 |:------- | --- |:----: | --- | :-----|
-| **label** | name of this relation; be specific. | string | "talk_friendship"| required. |
-| srcServiceName | source column's service | string | "kakaotalk" | required. |
-| srcColumnName | source column's name |string| "user_id"|required. |
-| srcColumnType | source column's data type | long/integer/string|"string"|required.|
-| tgtServiceName | target column's service | string | "kakaotalk"/"kakaoagit" | same as srcServiceName when not specified
-| tgtColumnName | target column's name |string|"item_id"|required.|
-| tgtColumnType | target column's data type | long/integer/string | "long" | required. |
-| isDirected | if this label is directed or undirected | true/false | true/false | default true |
-| **serviceName** | which service this label is belongs to. | string |s2graph |default tgtServiceName
+| **label** |  명확히 정해져있는 이 관계의 name. | string | "talk_friendship"| required. |
+| srcServiceName | source column의 service | string | "kakaotalk" | required. |
+| srcColumnName | source column의 name |string| "user_id"|required. |
+| srcColumnType | source column의 data type | long/integer/string|"string"|required.|
+| tgtServiceName | target column의 service | string | "kakaotalk"/"kakaoagit" | 정의되어 있지 않을 때는, srcServiceName 과 같다.
+| tgtColumnName | target column의 name |string|"item_id"|required.|
+| tgtColumnType | target column의 data type | long/integer/string | "long" | required. |
+| isDirected | 이 label 이 방향이 있는지 혹은 없는지(directed or undirected) | true/false | true/false | 기본은 true |
+| **serviceName** | service label이 속해있는 것. | string |s2graph |기본은 tgtServiceName
 | hTableName | if this label need special usecase(such as batch upload), own hbase table name can be used. | string | s2graph-batch | default use service`s hTableName. <br> note that this is optional. |
 | hTableTTL | time to data keep alive. | integer |   86000 | default use service`s hTableTTL. <br> note that this is optional. |
-| consistencyLevel | if this is strong, only one edge between same from/to can be made. otherwise(weak) multiple edges with same from/to can be exist. | string | strong/weak | default weak |
+| consistencyLevel | strong 이면, from-to 간에 하나의 edge 만 사용할 수 있다. 그것과 달리 weak 는 from-to 간의 edges 를 여러개 가진다. (대부분은 weak 를 사용한다)| string | strong/weak | default weak |
 |**indexProps** | see below |
 |**props** | see below |
 
-Most important elements for label is their **indexProps** and **props**
+Label에서 대부분 중요한 elements 들은 **indexProps** 과 **props** 이다.
 
-All of graph element including Vertex and Edge has their properties. single property is defined as following. property is simple key, value map on Edge and Vertex.
+정점과 에지를 포함하여 그래프 요소의 모든 자신의 속성이 있습니다. 하나의 속성은 다음과 같이 정의된다. 속성은 간단한 키, 가장자리와 정점에 값 맵입니다.
+Vertex 와 Edge 를 포함하여 graph 의 모든 element 는 그들의 properties 이다. 하나의 property 는 다음과 같이 정의된다. 
+property 는 Edge 와 Vertex의 심플한 key, value 의 map 형태이다. 
 ```
 {
     "name": "name of property",
@@ -230,7 +232,7 @@ All of graph element including Vertex and Edge has their properties. single prop
 }
 ```
 
-a simple example for props would look like this
+이 것은 props 를 알 수 있는 간단한 예제이다.
 ```
 [
     {"name": "play_count", "defaultValue": 0, "dataType": "integer"},
@@ -240,15 +242,13 @@ a simple example for props would look like this
 ]
 ```
 
-note that property value type should be **numeric**(byte, short, integer, float, double) or **boolean** or **string**.
+property 값 type 은 **numeric**(byte, short, integer, float, double) 과 **boolean** 혹은 **string** 이어야 한다는 점 유의하자.
 
-**indexProps** define primary index for this label(like `PRIMARY INDEX idx_xxx`(`p1, p2`) in RDBMS).
+**indexProps** 은 이 label 의 primary index 를 정의한다.(RDBMS 의 `PRIMARY INDEX idx_xxx`(`p1, p2`) 와 동일).
 
-s2graph will automatically keep edges sorted according to this indexProps. 
+s2graph 는 자동으로 이 indexProps 에 따라 정렬도괴 edges 를 유지할 것이다. edges 에 멀티 정렬 을 필요로 할 때 기타 indexProps 은 나중에 정의할 수 있다. 
 
-extra indexProps can be defined later when need multiple ordering on edges.
-
-**props** define meta datas that will not be affect the order of edges. 
+**props** 는 edges 정렬에 영향을 미치지 않는 메타 데이터를 정의한다.
 
  
 One last thing to note here is that s2graph reserved following property names. user can`t create following property name but they can use as it is provided by default.
