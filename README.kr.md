@@ -252,14 +252,15 @@ s2graph 는 자동으로 이 indexProps 에 따라 정렬도괴 edges 를 유지
 
  
 One last thing to note here is that s2graph reserved following property names. user can`t create following property name but they can use as it is provided by default.
+마지막으로 주의해야 할 점은 property 이름이 아래와 같이 예약되어 있다. 사용자는 아래와 같은 propety 이름을 생성할 수 없고, 기본적으로 제공된 것들을 사용할 수 있다. 
 
->1. **_timestamp** is reserved for system wise timestamp. this can be interpreted as last_modified_at
->2. **_from** is reserved for label`s start vertex.
->3. **_to** is reserved for 
+>1. **_timestamp** 은 system 에 대한 timestamp 이다. 이것은 last_modified_at 로 설명할 수 있다.
+>2. **_from** 은 label의 시작 vertex 이다.
+>3. **_to** 또한 edge 의 vertex 이다. 
 
-### 1.2 label example
+### 1.2 label 예제 
 
-Here is example that creates a label named `user_article_liked` label between column `user_id` of service `s2graph` and column `article_id` of service `s2graph_news`. Note that the default indexed property `_timestamp` will be created since the `indexedProps` field is empty.
+여기 `s2graph` 서비스의 `user_id` column과 `s2graph_news` 서비스의 `article_id` column 간에 `user_article_liked` label 로 불리우는 label 을 생성하는 예다. `indexedProps` field 이후 `_timestamp` 는 빈 값의 기본 속성으로 생성된다.
 
 ```
 curl -XPOST localhost:9000/graphs/createLabel -H 'Content-Type: Application/json' -d '
